@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0-windows</TargetFramework>
+    <TargetFramework>net9.0-windows</TargetFramework>
     <RootNamespace>SuchByte.WindowsUtils</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <Reference Include="Macro Deck 2">
-      <HintPath>C:\Program Files\Macro Deck\Macro Deck 2.dll</HintPath>
+      <HintPath>E:\macrodeck-git\MacroDeck\bin\Debug\net9.0-windows\win-x64\Macro Deck 2.dll</HintPath>
       <Private>false</Private>
       <EmbedInteropTypes>false</EmbedInteropTypes>
     </Reference>
@@ -64,7 +64,14 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;C:\Users\Manuel\AppData\Roaming\Macro Deck\plugins\SuchByte.WindowsUtils\$(TargetName).dll&quot;" />
+    <!-- <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;C:\Users\user\AppData\Macro Deck\plugins\Shlop.WindowsUtilsRevamped\$(TargetName).dll&quot;" /> -->
+
+    <!-- copy directly to plugins folder to skip installation -->
+    <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;C:\Users\user\AppData\Roaming\Macro Deck\plugins\Shlop.WindowsUtilsRevamped\$(TargetName).dll&quot;" />
+
+    <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)archive_script.ps1&quot;" />
+
+    <Exec Command="dotnet run --project e:\macrodeck-git\MacroDeck\MacroDeck.csproj" />
   </Target>
 
 </Project>
