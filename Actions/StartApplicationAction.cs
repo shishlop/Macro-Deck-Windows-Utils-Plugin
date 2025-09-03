@@ -1,4 +1,5 @@
-﻿using SuchByte.MacroDeck.ActionButton;
+﻿using SuchByte.MacroDeck.Logging;
+using SuchByte.MacroDeck.ActionButton;
 using SuchByte.MacroDeck.GUI;
 using SuchByte.MacroDeck.GUI.CustomControls;
 using SuchByte.MacroDeck.Plugins;
@@ -23,10 +24,13 @@ public class StartApplicationAction : PluginAction
         var configModel = StartApplicationActionConfigModel.Deserialize(this.Configuration);
         if (configModel == null) return;
 
+        MacroDeckLogger.Info(PluginInstance.Main, $"Triggered StartApplicationAction with method {configModel.StartMethod}");
+
         switch (configModel.StartMethod)
         {
             case StartMethod.Start:
                 ApplicationLauncher.StartApplication(configModel.Path, configModel.Arguments, configModel.RunAsAdmin);
+                this.UpdateState();
                 break;
             case StartMethod.StartStop:
                 if (ApplicationLauncher.IsRunning(configModel.Path))
@@ -37,14 +41,42 @@ public class StartApplicationAction : PluginAction
                 {
                     ApplicationLauncher.StartApplication(configModel.Path, configModel.Arguments, configModel.RunAsAdmin);
                 }
+                this.UpdateState();
                 break;
             case StartMethod.StartFocus:
                 if (!ApplicationLauncher.IsRunning(configModel.Path))
                 {
                     ApplicationLauncher.StartApplication(configModel.Path, configModel.Arguments, configModel.RunAsAdmin);
-                } else
+                    this.UpdateState();
+                }
+                else
                 {
                     ApplicationLauncher.BringToForeground(configModel.Path);
+                    this.UpdateState();
+                }
+                break;
+            case StartMethod.ToggleUsingAHK:
+                ToggleAppResult toggleResult = AutoHotkeyRunner.ToggleApp(configModel.Path);
+                switch (toggleResult)
+                {
+                    case ToggleAppResult.NothingHappened:
+                        MacroDeckLogger.Info(PluginInstance.Main, $"App not running and was not launched. ({configModel.Path})");
+                        break;
+                    case ToggleAppResult.ApplicationStarted:
+                        MacroDeckLogger.Info(PluginInstance.Main, $"Successfully started the application. ({configModel.Path})");
+                        this.ActionButton.State = true;
+                        break;
+                    case ToggleAppResult.ApplicationMinimized:
+                        MacroDeckLogger.Info(PluginInstance.Main, $"Successfully minimized the application. ({configModel.Path})");
+                        this.ActionButton.State = false;
+                        break;
+                    case ToggleAppResult.ApplicationFocused:
+                        MacroDeckLogger.Info(PluginInstance.Main, $"Successfully brought the application to the foreground. ({configModel.Path})");
+                        this.ActionButton.State = true;
+                        break;
+                    case ToggleAppResult.Error:
+                        MacroDeckLogger.Error(PluginInstance.Main, $"An error occurred during the AHK script execution. ({configModel.Path})");
+                        break;
                 }
                 break;
         }
@@ -60,25 +92,45 @@ public class StartApplicationAction : PluginAction
         var configModel = StartApplicationActionConfigModel.Deserialize(this.Configuration);
         if (configModel == null || !configModel.SyncButtonState) return;
 
-        Main.Instance.TickTimer.Elapsed += StateUpdateTimer_Elapsed;
+        // Subscribe to the global hook's event
+        WindowFocusMonitor.WindowFocusChanged += OnWindowFocusChanged;
     }
 
     public override void OnActionButtonDelete()
     {
-        Main.Instance.TickTimer.Elapsed -= StateUpdateTimer_Elapsed;
+        var configModel = StartApplicationActionConfigModel.Deserialize(this.Configuration);
+        if (configModel == null || !configModel.SyncButtonState) return;
+
+        // Unsubscribe from the event
+        WindowFocusMonitor.WindowFocusChanged -= OnWindowFocusChanged;
     }
 
-
-    private void StateUpdateTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+    private void OnWindowFocusChanged(string title, uint processId)
     {
-        Task.Run(UpdateState);
+        // Run this in a background task to not block the UI thread
+        Task.Run(() => UpdateState());
     }
 
+    // private void UpdateState(bool optionalForeState = false)
     private void UpdateState()
     {
         if (this.ActionButton == null) return;
         var configModel = StartApplicationActionConfigModel.Deserialize(this.Configuration);
         if (configModel == null || !configModel.SyncButtonState || string.IsNullOrWhiteSpace(configModel.Path)) return;
-        this.ActionButton.State = ApplicationLauncher.IsRunning(configModel.Path);
+
+        MacroDeckLogger.Info(PluginInstance.Main, $"Updating button state for method {configModel.StartMethod}");
+
+        switch (configModel?.StartMethod)
+        {
+            case StartMethod.StartStop:
+                this.ActionButton.State = ApplicationLauncher.IsRunning(configModel.Path);
+                break;
+            case StartMethod.StartFocus:
+            case StartMethod.ToggleUsingAHK:
+                this.ActionButton.State = ApplicationLauncher.IsFocused(configModel.Path);
+                break;
+            default:
+                return;
+        }
     }
 }

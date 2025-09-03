@@ -52,5 +52,6 @@ public class PluginStrings
     public string MethodStart = "Start";
     public string MethodStartStop = "Start/Stop";
     public string MethodStartFocus = "Start/Focus";
+    public string MethodToggleUsingAHK = "Toggle";
 
 }

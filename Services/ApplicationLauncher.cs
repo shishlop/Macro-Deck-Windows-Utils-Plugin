@@ -10,6 +10,7 @@ using System.Text;
 
 namespace SuchByte.WindowsUtils.Services;
 
+
 public class ApplicationLauncher
 {
     [DllImport("user32.dll")]
@@ -32,6 +33,10 @@ public class ApplicationLauncher
     [DllImport("kernel32.dll", SetLastError = true)]
     [return: MarshalAs(UnmanagedType.Bool)]
     static extern bool CloseHandle(IntPtr hObject);
+
+    [DllImport("user32.dll")]
+    private static extern IntPtr GetForegroundWindow();
+
 
 
     private const int SW_MINIMIZE = 0;
@@ -58,6 +63,24 @@ public class ApplicationLauncher
         path = WindowsShortcut.GetShortcutTarget(path);
         bool isRunning = GetProcessByPath(path) != null;
         return isRunning;
+    }
+
+    public static bool IsFocused(string path)
+    {
+        var process = GetProcessByPath(path);
+        if (process == null)
+        {
+            return false;
+        }
+
+        IntPtr targetHwnd = process.MainWindowHandle;
+        if (targetHwnd == IntPtr.Zero)
+        {
+            return false;
+        }
+
+        IntPtr foregroundHwnd = GetForegroundWindow();
+        return targetHwnd == foregroundHwnd;
     }
 
     public static void KillApplication(string path)

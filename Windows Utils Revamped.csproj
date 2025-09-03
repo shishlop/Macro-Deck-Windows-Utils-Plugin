@@ -63,13 +63,19 @@
     <Folder Include="GUI\CustomControls\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Autohotkey\ToggleApp.ahk">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <!-- <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;C:\Users\user\AppData\Macro Deck\plugins\Shlop.WindowsUtilsRevamped\$(TargetName).dll&quot;" /> -->
+    <!-- <Exec Command="xcopy /Y /S &quot;$(TargetDir)&quot; &quot;C:\Users\user\AppData\Macro Deck\plugins\Shlop.WindowsUtilsRevamped\&quot;" /> -->
+    <!-- <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)archive_script.ps1&quot;" /> -->
 
-    <!-- copy directly to plugins folder to skip installation -->
-    <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).dll&quot; &quot;C:\Users\user\AppData\Roaming\Macro Deck\plugins\Shlop.WindowsUtilsRevamped\$(TargetName).dll&quot;" />
+    <!-- copy directly to plugins folder of Macro Deck to skip installation -->
+    <Exec Command="xcopy /Y /S &quot;$(TargetDir)&quot; &quot;C:\Users\user\AppData\Roaming\Macro Deck\plugins\Shlop.WindowsUtilsRevamped\&quot;" />
 
-    <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(ProjectDir)archive_script.ps1&quot;" />
 
     <Exec Command="dotnet run --project e:\macrodeck-git\MacroDeck\MacroDeck.csproj" />
   </Target>

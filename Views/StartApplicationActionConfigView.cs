@@ -26,9 +26,11 @@ public partial class StartApplicationActionConfigView : ActionConfigControl
         this.lblArguments.Text = PluginLanguageManager.PluginStrings.Arguments;
         this.path.PlaceHolderText = PluginLanguageManager.PluginStrings.ChooseAFileOrDragAndDrop;
 
-        this.method.Items.AddRange(new[] { PluginLanguageManager.PluginStrings.MethodStart, 
-                                            PluginLanguageManager.PluginStrings.MethodStartStop, 
-                                            PluginLanguageManager.PluginStrings.MethodStartFocus, });
+        this.method.Items.AddRange(new[] { PluginLanguageManager.PluginStrings.MethodStart,
+                                            PluginLanguageManager.PluginStrings.MethodStartStop,
+                                            PluginLanguageManager.PluginStrings.MethodStartFocus,
+                                            PluginLanguageManager.PluginStrings.MethodToggleUsingAHK
+                                            });
 
         this.path.AllowDrop = true;
         this.path.DragEnter += ApplicationSelector_DragEnter;
@@ -74,6 +76,9 @@ public partial class StartApplicationActionConfigView : ActionConfigControl
             case StartMethod.StartFocus:
                 this.method.Text = PluginLanguageManager.PluginStrings.MethodStartFocus;
                 break;
+            case StartMethod.ToggleUsingAHK:
+                this.method.Text = PluginLanguageManager.PluginStrings.MethodToggleUsingAHK;
+                break;
         }
         this.checkRunAsAdmin.Checked = this._viewModel.RunAsAdmin;
         this.checkSyncButtonState.Checked = this._viewModel.SyncButtonState;
@@ -91,7 +96,7 @@ public partial class StartApplicationActionConfigView : ActionConfigControl
         {
             this._viewModel.StartMethod = StartMethod.Start;
         }
-        else if(this.method.Text.Equals(PluginLanguageManager.PluginStrings.MethodStartStop))
+        else if (this.method.Text.Equals(PluginLanguageManager.PluginStrings.MethodStartStop))
         {
             this._viewModel.StartMethod = StartMethod.StartStop;
         }
@@ -99,10 +104,14 @@ public partial class StartApplicationActionConfigView : ActionConfigControl
         {
             this._viewModel.StartMethod = StartMethod.StartFocus;
         }
+        else if (this.method.Text.Equals(PluginLanguageManager.PluginStrings.MethodToggleUsingAHK))
+        {
+            this._viewModel.StartMethod = StartMethod.ToggleUsingAHK;
+        }
         this._viewModel.RunAsAdmin = this.checkRunAsAdmin.Checked;
         this._viewModel.SyncButtonState = this.checkSyncButtonState.Checked;
 
-       
+
 
 
         using (var msgBox = new MacroDeck.GUI.CustomControls.MessageBox())

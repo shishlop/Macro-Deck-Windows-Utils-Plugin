@@ -1,4 +1,5 @@
-﻿using SuchByte.MacroDeck.Plugins;
+﻿using SuchByte.MacroDeck.Logging;
+using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.Actions;
 using SuchByte.WindowsUtils.Language;
 using System.Collections.Generic;
@@ -16,8 +17,6 @@ public class Main : MacroDeckPlugin
     public static Main Instance;
 
     public InputSimulator InputSimulator = new();
-
-    public System.Timers.Timer TickTimer;
 
     public Main()
     {
@@ -45,11 +44,10 @@ public class Main : MacroDeckPlugin
             //new MultiHotkeyAction(),
         };
 
-        this.TickTimer = new System.Timers.Timer()
-        {
-            Enabled = true,
-            Interval = 2000,
-        };
-        this.TickTimer.Start();
+        // note(shlop): Start monitoring for window focus changes globally.
+        // This should only be called once when the plugin loads.
+        // Ideally MacroDeckPlugin should define OnLoad and OnUnload methods for such initialization and cleanup tasks.
+        // Right now, I just use a boolean flag in WindowFocusMonitor to prevent multiple initializations.
+        WindowFocusMonitor.StartMonitoring();
     }
 }
