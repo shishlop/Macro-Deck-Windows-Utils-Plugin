@@ -1,10 +1,10 @@
 {
   "type" : "Plugin",
-  "name" : "Windows Utils",
-  "author" : "Macro Deck",
-  "repository" : "https://github.com/SuchByte/Macro-Deck-Windows-Utils-Plugin",
-  "packageId" : "SuchByte.WindowsUtils",
+  "name" : "Windows Utils Revamped",
+  "author" : "Macro Deck, Shlop",
+  "repository" : "",
+  "packageId" : "Shlop.WindowsUtilsRevamped",
   "version" : "1.5.0",
   "target-plugin-api-version" : 40,
-  "dll" : "Windows Utils.dll"
+  "dll" : "WindowsUtilsRevamped.dll"
 }

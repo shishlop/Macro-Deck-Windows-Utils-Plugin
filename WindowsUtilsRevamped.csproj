@@ -1,0 +1,113 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net9.0-windows10.0.26100.0</TargetFramework>
+		<RootNamespace>Shlop.WindowsUtilsRevamped</RootNamespace>
+		<UseWindowsForms>true</UseWindowsForms>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
+		<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+		<Authors>Macro Deck</Authors>
+		<Company>Macro Deck</Company>
+		<AssemblyName>WindowsUtilsRevamped</AssemblyName>
+		<AssemblyVersion>1.5.0.0</AssemblyVersion>
+		<FileVersion>1.5.0.0</FileVersion>
+		<Version>1.5.0</Version>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
+		<Platforms>AnyCPU;x64</Platforms>
+		<DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+		<SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Resources\Languages\*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Languages\*" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="H.InputSimulator" Version="1.4.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="GUI\CustomControls\" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Update="Autohotkey\ToggleApp.ahk">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="ExtensionManifest.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="ExtensionIcon.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\macrodeck-git\MacroDeck\MacroDeck.csproj" />
+	</ItemGroup>
+
+	<!-- Directly copy the plugin to folder where Macro Deck looks. Convenient to bypass the installation step. -->
+	<Target Name="CopyPluginToMacroDeck" AfterTargets="AfterBuild" Condition="'$(Configuration)' == 'Debug'">
+		<PropertyGroup>
+			<!-- Destination plugin folder -->
+			<PluginFolder>C:\Users\user\AppData\Roaming\Macro Deck\plugins\Shlop.WindowsUtilsRevamped\</PluginFolder>
+			<!-- Where this project builds -->
+			<PluginBuildDir>$(OutputPath)</PluginBuildDir>
+		</PropertyGroup>
+
+		<!-- Ensure plugin folder exists -->
+		<MakeDir Directories="$(PluginFolder)" />
+		<MakeDir Directories="$(PluginFolder)\Autohotkey" />
+
+		<!-- Files going to plugin root -->
+		<ItemGroup>
+			<PluginRootFiles Include="$(PluginBuildDir)WindowsUtilsRevamped.dll" />
+			<PluginRootFiles Include="$(PluginBuildDir)WindowsUtilsRevamped.pdb" />
+			<PluginRootFiles Include="$(PluginBuildDir)WindowsUtilsRevamped.deps.json" />
+			<PluginRootFiles Include="$(PluginBuildDir)H.InputSimulator.dll" />
+			<PluginRootFiles Include="$(MSBuildProjectDirectory)\ExtensionManifest.json" />
+			<PluginRootFiles Include="$(MSBuildProjectDirectory)\ExtensionIcon.png" />
+		</ItemGroup>
+
+		<!-- Files going to Autohotkey subfolder -->
+		<ItemGroup>
+			<PluginAutoHotkeyFiles Include="$(MSBuildProjectDirectory)\Autohotkey\ToggleApp.ahk" />
+		</ItemGroup>
+
+		<!-- Copy root files -->
+		<Copy SourceFiles="@(PluginRootFiles)" DestinationFolder="$(PluginFolder)" SkipUnchangedFiles="false" OverwriteReadOnlyFiles="true" />
+
+		<!-- Copy Autohotkey files -->
+		<Copy SourceFiles="@(PluginAutoHotkeyFiles)" DestinationFolder="$(PluginFolder)\Autohotkey" SkipUnchangedFiles="false" OverwriteReadOnlyFiles="true" />
+	</Target>
+</Project>
