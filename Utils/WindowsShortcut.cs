@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace SuchByte.WindowsUtils.Utils;
+﻿namespace SuchByte.WindowsUtils.Utils;
 
 internal class WindowsShortcut
 {

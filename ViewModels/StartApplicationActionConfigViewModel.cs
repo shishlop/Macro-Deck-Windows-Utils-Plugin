@@ -1,7 +1,6 @@
 ﻿using SuchByte.MacroDeck.Logging;
 using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.Models;
-using System;
 
 namespace SuchByte.WindowsUtils.ViewModels;
 
@@ -65,7 +64,7 @@ internal class StartApplicationActionConfigViewModel : ISerializableConfigViewMo
         }
         catch (Exception ex)
         {
-            MacroDeckLogger.Error(PluginInstance.Main, $"{GetType().Name}: Error while saving config: { ex.Message + Environment.NewLine + ex.StackTrace }");
+            MacroDeckLogger.Error(PluginInstance.Main, $"{GetType().Name}: Error while saving config: {ex.Message + Environment.NewLine + ex.StackTrace}");
         }
         return true;
     }

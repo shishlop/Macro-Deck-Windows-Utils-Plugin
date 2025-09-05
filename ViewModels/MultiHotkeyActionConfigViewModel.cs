@@ -1,8 +1,6 @@
 ﻿using SuchByte.MacroDeck.Logging;
 using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.Models;
-using System;
-using System.Collections.Generic;
 
 namespace SuchByte.WindowsUtils.ViewModels;
 
@@ -42,7 +40,7 @@ internal class MultiHotkeyActionConfigViewModel : ISerializableConfigViewModel
         }
         catch (Exception ex)
         {
-            MacroDeckLogger.Error(PluginInstance.Main, $"{GetType().Name}: Error while saving config: { ex.Message + Environment.NewLine + ex.StackTrace }");
+            MacroDeckLogger.Error(PluginInstance.Main, $"{GetType().Name}: Error while saving config: {ex.Message + Environment.NewLine + ex.StackTrace}");
         }
         return true;
     }

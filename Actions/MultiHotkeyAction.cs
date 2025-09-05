@@ -4,7 +4,6 @@ using SuchByte.MacroDeck.GUI.CustomControls;
 using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.GUI;
 using SuchByte.WindowsUtils.Models;
-using System.Threading.Tasks;
 
 namespace SuchByte.WindowsUtils.Actions;
 
@@ -44,7 +43,7 @@ public class MultiHotkeyAction : PluginAction
             executing = false;
             if (configModel.SyncButtonState) this.ActionButton.State = false;
         });
-        
+
     }
 
     public override ActionConfigControl GetActionConfigControl(ActionConfigurator actionConfigurator)
@@ -52,5 +51,5 @@ public class MultiHotkeyAction : PluginAction
         return new StartApplicationActionConfigView(this);
     }
 
-    
+
 }

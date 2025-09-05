@@ -1,7 +1,6 @@
 ﻿using SuchByte.MacroDeck.GUI.CustomControls;
 using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.ViewModels;
-using System;
 
 namespace SuchByte.WindowsUtils.Views;
 

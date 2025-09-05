@@ -6,8 +6,6 @@ using SuchByte.MacroDeck.Logging;
 using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.GUI;
 using SuchByte.WindowsUtils.Language;
-using System;
-using System.Linq;
 
 namespace SuchByte.WindowsUtils.Actions;
 

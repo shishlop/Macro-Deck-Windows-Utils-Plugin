@@ -1,6 +1,6 @@
 ﻿using SuchByte.MacroDeck.Icons;
-using SuchByte.WindowsUtils.Models;
 using SuchByte.MacroDeck.Logging;
+using SuchByte.WindowsUtils.Models;
 
 namespace SuchByte.WindowsUtils.Utils;
 
@@ -11,7 +11,7 @@ public static class FileIconImport
         string fileName = Path.GetFileNameWithoutExtension(filePath);
         string systemIconPackName = "System";
         MacroDeck.Icons.Icon existingIcon = IconManager.GetIconByString($"{systemIconPackName}.{fileName}");
-        
+
         if (existingIcon != null)
         {
             return new IconImportModel()

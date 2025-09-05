@@ -1,5 +1,4 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using static SuchByte.WindowsUtils.Utils.ShellIcon;
 
 namespace SuchByte.WindowsUtils.Utils;

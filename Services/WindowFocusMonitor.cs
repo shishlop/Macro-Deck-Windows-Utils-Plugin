@@ -1,10 +1,7 @@
-using System;
-using System.Runtime.InteropServices;
-using System.Text;
 using SuchByte.MacroDeck.Logging;
 using SuchByte.WindowsUtils;
-using System.Threading;
-using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using System.Text;
 
 // Monitors window focus changes and raises an event when the focused window changes (globally)
 // Example: button states which depend on the currently focused application
@@ -52,7 +49,7 @@ public class WindowFocusMonitor
         MacroDeckLogger.Info(Main.Instance, "Started monitoring global window focus changes on a new thread.");
     }
 
-   public static void StopMonitoring()
+    public static void StopMonitoring()
     {
         if (_monitorThread != null && _monitorThread.IsAlive)
         {

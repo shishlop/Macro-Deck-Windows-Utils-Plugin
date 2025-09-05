@@ -2,9 +2,7 @@
 using SuchByte.MacroDeck.GUI;
 using SuchByte.MacroDeck.GUI.CustomControls;
 using SuchByte.WindowsUtils.Actions;
-using System;
 using System.Diagnostics;
-using System.Windows.Forms;
 using WindowsInput;
 
 namespace SuchByte.WindowsUtils.GUI;
@@ -42,7 +40,7 @@ public partial class HotkeyConfigurator : ActionConfigControl
         {
             this.pluginAction.Configuration = jObject.ToString();
         }
-        this.pluginAction.ConfigurationSummary = 
+        this.pluginAction.ConfigurationSummary =
             (checkLWin.Checked ? "lwin + " : "") + (checkRWin.Checked ? "rwin + " : "") +
             (checkLCtrl.Checked ? "lctrl + " : "") + (checkRCtrl.Checked ? "rctrl + " : "") + (checkCtrl.Checked ? "ctrl + " : "") +
             (checkLShift.Checked ? "lshift + " : "") + (checkRShift.Checked ? "rshift + " : "") + (checkShift.Checked ? "shift + " : "") +

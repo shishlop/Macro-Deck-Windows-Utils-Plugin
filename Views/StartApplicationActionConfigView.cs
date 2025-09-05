@@ -108,7 +108,7 @@ public partial class StartApplicationActionConfigView : ActionConfigControl
         this._viewModel.RunAsAdmin = this.checkRunAsAdmin.Checked;
         this._viewModel.SyncButtonState = this.checkSyncButtonState.Checked;
 
-        SuchByte.MacroDeck.GUI.ButtonEditor buttonEditor = 
+        SuchByte.MacroDeck.GUI.ButtonEditor buttonEditor =
             SuchByte.MacroDeck.GUI.ButtonEditor.CurrentButtonEditor;
 
         if (!this._viewModel.DeriveAppIcon && buttonEditor != null)

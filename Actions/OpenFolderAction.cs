@@ -5,7 +5,6 @@ using SuchByte.MacroDeck.GUI.CustomControls;
 using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.GUI;
 using SuchByte.WindowsUtils.Language;
-using System;
 using System.Diagnostics;
 
 namespace SuchByte.WindowsUtils.Actions;

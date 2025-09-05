@@ -3,9 +3,6 @@ using SuchByte.MacroDeck.GUI.CustomControls;
 using SuchByte.MacroDeck.Language;
 using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.Language;
-using System;
-using System.IO;
-using System.Windows.Forms;
 
 namespace SuchByte.WindowsUtils.GUI;
 
@@ -50,7 +47,8 @@ public partial class CommandSelector : ActionConfigControl
             return false;
         }
 
-        if (String.IsNullOrWhiteSpace(this.workingDirectory.Text)) {
+        if (String.IsNullOrWhiteSpace(this.workingDirectory.Text))
+        {
             try
             {
                 FileAttributes attr = File.GetAttributes(this.workingDirectory.Text);
@@ -62,7 +60,8 @@ public partial class CommandSelector : ActionConfigControl
                     }
                     return false;
                 }
-            } catch {}
+            }
+            catch { }
         }
 
         JObject configurationObject = JObject.FromObject(new

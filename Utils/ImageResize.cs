@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-
-namespace SuchByte.WindowsUtils.Utils;
+﻿namespace SuchByte.WindowsUtils.Utils;
 
 public class ImageResize
 {

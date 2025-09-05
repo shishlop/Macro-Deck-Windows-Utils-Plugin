@@ -1,13 +1,12 @@
-﻿using SuchByte.MacroDeck.Logging;
-using SuchByte.MacroDeck.ActionButton;
+﻿using SuchByte.MacroDeck.ActionButton;
 using SuchByte.MacroDeck.GUI;
 using SuchByte.MacroDeck.GUI.CustomControls;
+using SuchByte.MacroDeck.Logging;
 using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.GUI;
 using SuchByte.WindowsUtils.Language;
 using SuchByte.WindowsUtils.Models;
 using SuchByte.WindowsUtils.Services;
-using System.Threading.Tasks;
 
 namespace SuchByte.WindowsUtils.Actions;
 

@@ -1,9 +1,6 @@
 ﻿using SuchByte.MacroDeck.Logging;
 using SuchByte.WindowsUtils.Utils;
-using System;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -104,13 +101,13 @@ public class ApplicationLauncher
         if (p == null) return;
 
         IntPtr handle = p.MainWindowHandle;
-        
+
         ShowWindow(handle, 5);
-	ShowWindow(handle, 10);
-        
+        ShowWindow(handle, 10);
+
         if (!IsIconic(handle))
         {
-                return;
+            return;
         }
         MinimizeAndRestoreWindow(handle); // Fallback function
     }

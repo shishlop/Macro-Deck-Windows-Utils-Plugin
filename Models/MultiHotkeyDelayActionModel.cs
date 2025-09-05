@@ -1,6 +1,4 @@
-﻿using System.Threading;
-
-namespace SuchByte.WindowsUtils.Models;
+﻿namespace SuchByte.WindowsUtils.Models;
 
 public class MultiHotkeyDelayActionModel : IMultiHotkeyAction
 {

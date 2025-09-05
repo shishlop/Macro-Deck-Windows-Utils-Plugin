@@ -1,8 +1,6 @@
 ﻿using SuchByte.MacroDeck.GUI.CustomControls;
 using SuchByte.MacroDeck.Icons;
 using SuchByte.MacroDeck.Language;
-using System;
-using System.Windows.Forms;
 
 namespace SuchByte.WindowsUtils.GUI;
 

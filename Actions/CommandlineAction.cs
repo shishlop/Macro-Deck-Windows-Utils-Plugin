@@ -6,7 +6,6 @@ using SuchByte.MacroDeck.Plugins;
 using SuchByte.MacroDeck.Variables;
 using SuchByte.WindowsUtils.GUI;
 using SuchByte.WindowsUtils.Language;
-using System;
 using System.Diagnostics;
 
 namespace SuchByte.WindowsUtils.Actions;
@@ -47,10 +46,11 @@ public class CommandlineAction : PluginAction
                     Debug.WriteLine(output);
                     var variableName = configurationObject["variableName"].ToString();
                     Enum.TryParse(typeof(VariableType), configurationObject["variableType"].ToString(), true, out object type);
-                    VariableManager.SetValue(variableName, output, (VariableType) type, PluginInstance.Main, null);
+                    VariableManager.SetValue(variableName, output, (VariableType)type, PluginInstance.Main, null);
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Debug.WriteLine(e.Message);
             }
         }

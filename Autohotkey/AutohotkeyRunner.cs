@@ -1,9 +1,6 @@
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 using SuchByte.MacroDeck.Logging;
 using SuchByte.WindowsUtils;
+using System.Diagnostics;
 using System.Reflection;
 
 public enum ToggleAppResult
