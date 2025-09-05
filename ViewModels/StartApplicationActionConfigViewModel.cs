@@ -36,6 +36,12 @@ internal class StartApplicationActionConfigViewModel : ISerializableConfigViewMo
         set => Configuration.SyncButtonState = value;
     }
 
+    public bool DeriveAppIcon
+    {
+        get => Configuration.DeriveAppIcon;
+        set => Configuration.DeriveAppIcon = value;
+    }
+
     public StartMethod StartMethod
     {
         get => Configuration.StartMethod;

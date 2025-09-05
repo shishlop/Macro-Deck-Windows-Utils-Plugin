@@ -26,7 +26,6 @@ public class PluginStrings
     public string Arguments = "Arguments";
     public string ChooseAFileOrDragAndDrop = "Choose a file or drag and drop it here";
     public string ChooseAFolderOrDragAndDrop = "Choose a folder or drag and drop it here";
-    public string QuestionImportFilesIcon = "Do you want to import the file's icon?";
     public string QuestionImportFileTypesIcon = "Do you want to import icon of the file type?";
     public string ImportIcon = "Import icon";
     public string Action = "Action";

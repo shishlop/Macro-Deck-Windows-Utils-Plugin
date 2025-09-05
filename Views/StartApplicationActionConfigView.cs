@@ -4,9 +4,6 @@ using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.Language;
 using SuchByte.WindowsUtils.Models;
 using SuchByte.WindowsUtils.ViewModels;
-using System;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace SuchByte.WindowsUtils.GUI;
 
@@ -111,24 +108,23 @@ public partial class StartApplicationActionConfigView : ActionConfigControl
         this._viewModel.RunAsAdmin = this.checkRunAsAdmin.Checked;
         this._viewModel.SyncButtonState = this.checkSyncButtonState.Checked;
 
+        SuchByte.MacroDeck.GUI.ButtonEditor buttonEditor = 
+            SuchByte.MacroDeck.GUI.ButtonEditor.CurrentButtonEditor;
 
-
-
-        using (var msgBox = new MacroDeck.GUI.CustomControls.MessageBox())
+        if (!this._viewModel.DeriveAppIcon && buttonEditor != null)
         {
-            if (msgBox.ShowDialog(PluginLanguageManager.PluginStrings.ImportIcon, PluginLanguageManager.PluginStrings.QuestionImportFilesIcon, MessageBoxButtons.YesNo) == DialogResult.Yes)
+            try
             {
-                try
+                var iconModel = Utils.FileIconImport.ImportIcon(this.path.Text);
+                if (iconModel != null)
                 {
-                    var iconModel = Utils.FileIconImport.ImportIcon(this.path.Text);
-                    if (iconModel != null)
-                    {
-                    }
+                    buttonEditor.SetButtonOffIcon(iconModel.ToString());
+                    buttonEditor.SetButtonOnIcon(iconModel.ToString());
                 }
-                catch (Exception ex)
-                {
-                    MacroDeckLogger.Error(Main.Instance, $"Failed to import the file icon: {ex.Message + Environment.NewLine + ex.StackTrace}");
-                }
+            }
+            catch (Exception ex)
+            {
+                MacroDeckLogger.Error(Main.Instance, $"Failed to import the file icon: {ex.Message + Environment.NewLine + ex.StackTrace}");
             }
         }
         return this._viewModel.SaveConfig();

@@ -1,8 +1,6 @@
-﻿using SuchByte.MacroDeck.Logging;
-using SuchByte.MacroDeck.Plugins;
+﻿using SuchByte.MacroDeck.Plugins;
 using SuchByte.WindowsUtils.Actions;
 using SuchByte.WindowsUtils.Language;
-using System.Collections.Generic;
 using WindowsInput;
 
 namespace SuchByte.WindowsUtils;
@@ -38,10 +36,7 @@ public class Main : MacroDeckPlugin
             new DecreaseVolumeAction(),
             new MuteVolumeAction(),
             new WindowsExplorerControlAction(),
-            //new WebrequestAction(), // TODO
-            //new WindowsOpenWebsiteAction(), // TODO
             new HotkeyAction(),
-            //new MultiHotkeyAction(),
         };
 
         // note(shlop): Start monitoring for window focus changes globally.
