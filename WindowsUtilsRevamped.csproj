@@ -8,7 +8,7 @@
 		<ApplicationHighDpiMode>SystemAware</ApplicationHighDpiMode>
 		<ForceDesignerDpiUnaware>true</ForceDesignerDpiUnaware>
 		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-		<Authors>Macro Deck</Authors>
+		<Authors>Macro Deck, Shlop</Authors>
 		<Company>Macro Deck</Company>
 		<AssemblyName>WindowsUtilsRevamped</AssemblyName>
 		<AssemblyVersion>1.5.0.0</AssemblyVersion>
@@ -29,11 +29,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Remove="Resources\Languages\*" />
+		<None Remove="Language\Languages\*" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="Resources\Languages\*" />
+		<EmbeddedResource Include="Language\Languages\*" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -54,10 +54,6 @@
 			<Generator>ResXFileCodeGenerator</Generator>
 			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
 		</EmbeddedResource>
-	</ItemGroup>
-
-	<ItemGroup>
-		<Folder Include="GUI\CustomControls\" />
 	</ItemGroup>
 
 	<ItemGroup>

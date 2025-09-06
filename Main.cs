@@ -1,9 +1,19 @@
-﻿using SuchByte.MacroDeck.Plugins;
-using SuchByte.WindowsUtils.Actions;
-using SuchByte.WindowsUtils.Language;
+﻿using Shlop.WindowsUtilsRevamped.Language;
+using SuchByte.MacroDeck.Plugins;
+using Shlop.WindowsUtilsRevamped.Actions.CommandLine;
+using Shlop.WindowsUtilsRevamped.Actions.DecreaseVolume;
+using Shlop.WindowsUtilsRevamped.Actions.Hotkey;
+using Shlop.WindowsUtilsRevamped.Actions.IncreaseVolume;
+//note(shlop): idk why multihotkey is not used
+//using Shlop.WindowsUtilsRevamped.Actions.MultiHotkey;
+using Shlop.WindowsUtilsRevamped.Actions.MuteVolume;
+using Shlop.WindowsUtilsRevamped.Actions.OpenFileFolder;
+using Shlop.WindowsUtilsRevamped.Actions.StartApplication;
+using Shlop.WindowsUtilsRevamped.Actions.WindowsExplorerControl;
+using Shlop.WindowsUtilsRevamped.Actions.WriteText;
 using WindowsInput;
 
-namespace SuchByte.WindowsUtils;
+namespace Shlop.WindowsUtilsRevamped;
 
 public static class PluginInstance
 {

@@ -1,7 +1,7 @@
 ﻿using SuchByte.MacroDeck.Language;
 using System.Xml.Serialization;
 
-namespace SuchByte.WindowsUtils.Language;
+namespace Shlop.WindowsUtilsRevamped.Language;
 
 public static class PluginLanguageManager
 {

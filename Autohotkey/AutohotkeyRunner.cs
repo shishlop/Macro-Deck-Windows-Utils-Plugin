@@ -1,5 +1,5 @@
 using SuchByte.MacroDeck.Logging;
-using SuchByte.WindowsUtils;
+using Shlop.WindowsUtilsRevamped;
 using System.Diagnostics;
 using System.Reflection;
 

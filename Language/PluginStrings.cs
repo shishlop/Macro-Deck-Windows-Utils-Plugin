@@ -1,4 +1,4 @@
-﻿namespace SuchByte.WindowsUtils.Language;
+﻿namespace Shlop.WindowsUtilsRevamped.Language;
 
 public class PluginStrings
 {
